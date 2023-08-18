@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Search</title>
+    <style>
+        body{
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 90%, black, blue, white, blue , black, blue, white);
+            background-repeat: no-repeat;
+        }
+        .input {
+            background-color: rgba(255, 102, 0, 0.412);
+            padding: 15px ;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #parameters {
+            background-color: rgb(177, 255, 235);
+            border-radius: 30px;
+            box-shadow: 2px 2px 5px 4px rgba(8, 9, 84, 0.323);
+            border: 2px solid green;
+            padding: 15px;
+        }
+        div {
+            background-color: rgba(255, 0, 0, 0.389);
+            border-radius: 10px;
+            padding: 25px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .hal {
+            background-color: white;
+            height: 300px;
+            width: 200px;
+            border-radius: 20px;
+            margin: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            gap: 30px;
+        }
+        #op {
+            display: none;
+            position: fixed;
+            bottom: 5%;
+            left: 20%;
+            background-color: rgb(200, 255, 249);
+            border: 5px solid rgb(71, 147, 252);
+            border-radius: 15px;
+            box-shadow: 2px 1px 4px 4px rgba(71, 69, 112, 0.319);
+            margin: auto;
+            width: 70%;
+            max-height: 80%;
+            overflow-y:auto ;
+            
+            scrollbar-color: rgba(0, 0, 0, 0.236);
+            scrollbar-width: 2px;
+            /* scroll-behavior: auto; */
+        }
+        ::-webkit-scrollbar {
+            width: 1px;
+            background-color: rgb(71, 147, 252);
+        }
+        #op2 {
+            min-height: 50vh;
+        }
+        #button {
+            position: absolute;
+            border-radius: 5px;
+            width: 30px;
+            aspect-ratio: 1/1;
+            padding: 5px;
+            top: 20px;
+            right: 20px;
+        }
+        #button:hover {
+            background-color: rgb(246, 78, 78);
+            border: none;
+        }
+        @media only screen and (max-width: 620px) {
+            #op2, .input, #parameters {
+                width: 100%;
+            }
+            #op {
+                width: 99%;
+                position: sticky;
+                margin: auto;
+            }
+            #op img {
+                display: none;
+            }
+            #button {
+                position: static;
+            }
+            .hal img {
+                height: 50%;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <section class="input">
+        <label for="parameters" >Search Cocktails here</label><br>
+        <input type="search" id="parameters" placeholder="eg: blue lagoon" size="60" autocomplete="on" onchange="dSearch()"  >
+    </section>
+
+    <div id="op">
+    </div>
+    <br>
+    <div id="op2">
+    </div>
+    <script>
+        function checking(sValue, txt) {
+            const pat = new RegExp(sValue, 'gi');
+            // alert(typeof txt + "\n n "+ txt +"\n regex = " +txt.search(pat) );
+            if( txt.search(pat) > -1 ) return true
+            // if( txt.includes(sValue))  return true;
+            else return false;
+        }
+        function dSearch() {
+            let sValue = document.getElementById("parameters").value;
+            let disp = document.getElementById("op2");
+            // let file = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +sValue;
+            let file = "http://www.thecocktaildb.com/api/json/v1/1/search.php?f=a";
+            async function geData(file) {
+                const x = await fetch(file);
+                const y = await x.json();
+                console.log(y);
+                const arr = y.drinks;
+                let i=0, j=0;
+                let len = arr.length;
+                // alert(" T: "+ typeof y+ "\narr: " + typeof arr + "\n arr len: " + len);
+                disp.innerHTML = ""
+                for( j=0; j<len; j++) {
+                    let txt = "";
+                    txt = JSON.stringify(arr[j]["strDrink"]);
+                    const blk = document.createElement("div");
+                    const vl = document.createTextNode("Name: " +arr[j]["strDrink"]);
+                    const im = document.createElement("img");
+                    im.src = arr[j]["strDrinkThumb"];
+                    im.style.height = '200px';
+                    blk.className = 'hal';
+                    const ab = JSON.stringify(arr[j]);
+                    blk.addEventListener('click', () => { modal(blk, ab);} );
+                    // console.log(typeof ab + ": \n " + ab);
+                    // alert(typeof txt + "\n n "+ txt);
+                    let decide = checking(sValue, txt);
+                    if ( decide ) {
+
+                        blk.appendChild(vl);
+                        blk.appendChild(im);
+                        
+                        disp.appendChild(blk);
+
+                    }
+                }
+            }
+            geData(file);
+        }
+
+                /* structure of file
+                file = { "drinks":[ {key:value, key:value, ...},
+                                    {key:value, key:value, ...},
+                                    {key:value, key:value, ...}, 
+                                    ... ] }
+                */
+
+        function modal(b, arr){
+            let dxd = document.getElementById("op");
+            let str ="";
+            // const cls = document.createElement("input");
+            const para = document.createElement("p");
+            const pic = document.createElement("img");
+            dxd.innerHTML ="<input id='button' type='button' onclick='closeD()' value='X'><br>";
+            dxd.style.display='flex';
+            dxd.style.gap = '5px';
+            const curr = JSON.parse(arr);
+            for( let i in curr ) {
+                if(curr[i]) {
+                    if(i != 'strDrinkThumb') {
+                        str = " " + i + ": " +curr[i] ;
+                        const txt = document.createTextNode(str);
+                        para.appendChild(txt);
+                        para.appendChild(document.createElement("br"));
+                    }
+                }
+            }
+            para.style.width = '70%';
+            pic.src = curr['strDrinkThumb'] ;
+            pic.style.height = '170px' ;
+            // pic.style.aspectRatio ='1/1';
+            dxd.appendChild(para);
+            dxd.appendChild(pic);
+        }
+
+        function closeD() {
+            let dxd = document.getElementById("op");
+            dxd.innerHTML ='nn';
+            dxd.style.display='none';
+        }
+    </script>
+</body>
+</html>
