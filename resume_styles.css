@@ -1,0 +1,84 @@
+* {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+body {
+    margin: 0;
+    background-color: #0d5c63;
+}
+header {
+    color: #bfedef;
+    padding: 20px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: blue;
+}
+
+.profilepic {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid #78cdd7;
+    margin: 10px 0px 0px 20px;
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    
+}
+.name {
+    font-size: 300%;
+    color: white;
+    margin-left: 330px;
+}
+
+h1 + p{
+    font-size: 130%;
+    margin-bottom: 2px;
+    margin-left: 330px;
+}
+.content, .schemes {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.basic {
+    flex: 30%;
+    padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    background-color: #bfedef;
+}
+.detailed {
+    padding: 10px 60px 10px 20px;
+    background-color: white;
+    border: 3px dotted #bfedef;
+    border-radius: 20px;
+}
+
+h2 {
+    color: #247b7b;
+}
+
+hr {
+    height: 3px;
+    background-color: #247b7b;
+    border-radius: 2px;
+}
+
+span{
+    color: #44a1a0;
+}
+
+/* .icon {
+    max-width: 20px;
+    min-height: 20px;
+    background-color: #c4b7cb;
+} */
