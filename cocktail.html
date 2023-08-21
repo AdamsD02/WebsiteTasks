@@ -7,40 +7,54 @@
     <style>
         body{
             min-height: 100vh;
-            background: radial-gradient(circle at 20% 90%, black, blue, white, blue , black, blue, white);
+            margin: 0px;
+            width: 100%;
+            background: radial-gradient(circle at 20% 90%, black, blue, white, blue , black, blue, white, blue);
             background-repeat: no-repeat;
         }
         .input {
+            width: 100%;
+            margin: 0px;
             background-color: rgba(255, 102, 0, 0.412);
-            padding: 15px ;
+            padding-top: 15px;
+            padding-bottom: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         #parameters {
             background-color: rgb(177, 255, 235);
-            border-radius: 30px;
-            box-shadow: 2px 2px 5px 4px rgba(8, 9, 84, 0.323);
+            border-radius: 15px;
+            box-shadow: 2px 2px 4px 3px rgba(8, 9, 84, 0.323);
             border: 2px solid green;
-            padding: 15px;
+            padding-top: 15px;
+            padding-bottom: 10px;
         }
-        div {
+        #op1 {
+            width: 90%;
             background-color: rgba(255, 0, 0, 0.389);
             border-radius: 10px;
-            padding: 25px;
             margin: auto;
+        }
+        #op2 {
+            min-height: 50vh;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            margin: 20px;
             display: flex;
             flex-wrap: wrap;
+            gap: 30px ;
         }
         .hal {
             background-color: white;
-            height: 300px;
+            height: 280px;
             width: 200px;
             border-radius: 20px;
-            margin: 20px;
             font-family: 'Courier New', Courier, monospace;
             text-align: center;
-            gap: 30px;
+        }
+        .halImg {
+            height: 200px;
         }
         #op {
             display: none;
@@ -61,12 +75,11 @@
             /* scroll-behavior: auto; */
         }
         ::-webkit-scrollbar {
+            display: none;
             width: 1px;
             background-color: rgb(71, 147, 252);
         }
-        #op2 {
-            min-height: 50vh;
-        }
+        
         #button {
             position: absolute;
             border-radius: 5px;
@@ -81,8 +94,15 @@
             border: none;
         }
         @media only screen and (max-width: 620px) {
-            #op2, .input, #parameters {
-                width: 100%;
+            #parameters {
+                width: 95%;
+            }
+            #op2 {
+                width: 90%;
+                padding-top: 10px;
+                padding-bottom: 5px;
+                gap: 20px;
+                margin: auto;
             }
             #op {
                 width: 99%;
@@ -96,11 +116,15 @@
             #button {
                 position: static;
             }
-            .hal img {
-                height: 50%;
+            .hal {
+                height: 120px;
+                width: max-content ;
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-top: 10px;
             }
-            p {
-                width: 99%;
+            .halImg {
+                height: 80px;
             }
         }
     </style>
@@ -112,11 +136,13 @@
         <input type="search" id="parameters" placeholder="eg: blue lagoon" size="60" autocomplete="on" onchange="dSearch()"  >
     </section>
 
-    <div id="op">
-    </div>
+    <div id="op"></div>
     <br>
-    <div id="op2">
-    </div>
+
+    <diV id="op1">
+        <div id="op2"></div>
+    </diV>
+
     <script>
         function checking(sValue, txt) {
             const pat = new RegExp(sValue, 'gi');
@@ -129,7 +155,7 @@
             let sValue = document.getElementById("parameters").value;
             let disp = document.getElementById("op2");
             // let file = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" +sValue;
-            let file = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a";
+            let file = "http://www.thecocktaildb.com/api/json/v1/1/search.php?f=a";
             async function geData(file) {
                 const x = await fetch(file);
                 const y = await x.json();
@@ -143,10 +169,10 @@
                     let txt = "";
                     txt = JSON.stringify(arr[j]["strDrink"]);
                     const blk = document.createElement("div");
-                    const vl = document.createTextNode("Name: " +arr[j]["strDrink"]);
+                    const vl = document.createTextNode("" +arr[j]["strDrink"]);
                     const im = document.createElement("img");
+                    im.className ="halImg" ;
                     im.src = arr[j]["strDrinkThumb"];
-                    im.style.height = '200px';
                     blk.className = 'hal';
                     const ab = JSON.stringify(arr[j]);
                     blk.addEventListener('click', () => { modal(blk, ab);} );
@@ -156,6 +182,7 @@
                     if ( decide ) {
 
                         blk.appendChild(vl);
+                        blk.appendChild(document.createElement("br"));
                         blk.appendChild(im);
                         
                         disp.appendChild(blk);
