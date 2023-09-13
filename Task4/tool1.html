@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool 1 - Merge </title>
+    <style>
+        #text3 {
+            width: 50%;
+            height: 200px;
+            background-color: aquamarine;
+            box-shadow: inset 0px 0px 10px rgb(136, 0, 255);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function mergeTexts() {
+            let t1 = document.getElementById("text1").value.toString();
+            let t2 = document.getElementById("text2").value.toString() ;
+            let t3 = document.getElementById("test3") ;
+
+            alert( t1 + "\n Type: " + typeof t1 +"\n--\n" + t2 +  "\n Type: " + typeof t2 );
+            t3.innerHTML = " " +typeof t1 + "." + typeof t2 ;
+        }
+    </script>
+
+    <!-- <form> -->
+    <h1>Merge Words</h1>
+    <p>Merge words, fast and easy.Use it for domain registrations,Google Adwords, whatever.</p>
+    <textarea id="text1" rows="10" cols="30" ></textarea>
+    <textarea id="text2" rows="10" cols="30" ></textarea>
+    <br><br>
+    <button onclick="mergeTexts()" >Click to Merge </button>
+    <br>
+    No. of combinations:
+    <br>
+    <div id="text3"></div>
+    <br>
+    <!-- </form> -->
+
+    
+</body>
+</html>
