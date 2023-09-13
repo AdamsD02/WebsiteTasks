@@ -39,11 +39,12 @@ if( isset($_POST['submit'])) {
     <textarea name="text1" rows="10" cols="30" ><?php echo $txt1 ; ?></textarea>
     <textarea name="text2" rows="10" cols="30" ><?php echo $txt2 ; ?></textarea>
     <br><br>
+    <input type="submit" name="submit" value="submit">
+    <br>
     No. of combinations: <?php echo $len1*$len2 ; ?>
     <br>
     <textarea name="text3" rows="10" cols="30" ><?php echo $op ; ?></textarea>
-    <br><br>
-    <input type="submit" name="submit" value="submit">
+    <br>
     </form>
 </body>
 
