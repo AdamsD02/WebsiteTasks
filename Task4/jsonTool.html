@@ -18,7 +18,7 @@
             padding-top: 30px;
         }
         #op {
-            min-width: 100px;
+            width: 500px;
             content: "";
         }
     </style>
@@ -27,7 +27,7 @@
 <body>
     <h1>JSON Validator</h1>
     <div>
-        <textarea class="input" id="input">There is something here</textarea>
+        <textarea class="input" id="input" rows="10" cols="50" >There is something here</textarea>
     </div>
     <br>
     <div>
@@ -39,10 +39,74 @@
     <div id="op"></div>
 
     <script>
+        class arr {
+            constructor() {
+                this.item = [] ;
+            }
+            addItem(element) {
+                return this.item.push(element) ;
+            }
+            clear() {
+                this.item = [] ;
+            }
+        }
+        const stack = new arr() ;
+
+        function checker(item) {
+            if( item == '{') {
+                //start object
+                stack.addItem(`}`) ;
+            }
+            else if( item == '[' ) {
+                //start array
+                stack.addItem(']') ;
+            }
+            else if( item == ':' ) {
+                //hold value
+            }
+        }
+
         function copyContent() {
             let inpt = document.getElementById("input").value ;
-            let op = document.getElementById("op").innerHTML ;
-            op = "=> " + inpt ;
+            let op = document.getElementById("op") ;
+            inpt.trim();
+            if( !/^\{/.test(inpt) && !/\}$/.test(inpt) ) {
+                op.innerHTML = `Error missing '{' or '}'` ;
+            }
+            else {
+                op.innerHTML = ` => ` + inpt + `<br> type: ` + typeof inpt;;
+            }
+
+            const sArr = inpt.split("");
+            let word = "" ;
+            
+            for (let i=0; i < sArr.length ; i++) {
+                if( /\w/.test(sArr[i]) ) {
+                    j = i ;
+                    while( /\w/.test(sArr[j])) {
+                        word += sArr[j] ;
+                        op.innerHTML += sArr[j] ;
+                        j++ ;
+                    }
+                    if( sArr[i-1] != `"` ) {
+                        op.innerHTML += '<br> Error found " at ' + (i-1) ;
+                        break ;
+                    }
+                    else if( sArr[j] != `"` ) {
+                        op.innerHTML += `<br> Error found " at ` +j ;
+                        break ;
+                    }
+                    else {
+                        i = j-1 ;
+                    }
+                }
+                else {
+                    op.innerHTML += sArr[i] ;
+                    checker(sArr[i]);
+                }
+            }
+            op.innerHTML += `<br><br> Stack items: ` + stack.item.join() ;
+            stack.clear();
         }
         // addEventListener("click", copyContent())
     </script>
