@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Validator</title>
+
+    <style>
+        textarea {
+            resize: none;
+            border: none;
+        }
+        div {
+            min-height: 20px;
+            width: fit-content;
+            background-color: rgb(160, 207, 191);
+            padding: 10px;
+            padding-top: 30px;
+        }
+        #op {
+            min-width: 100px;
+            content: "";
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JSON Validator</h1>
+    <div>
+        <textarea class="input" id="input">There is something here</textarea>
+    </div>
+    <br>
+    <div>
+        <!-- <label for="" ></label> -->
+        <textarea class="output" name="output" rows="10" cols="50" ></textarea>
+    </div>
+    <br>
+    <button id="saas" type="button" onclick="copyContent()" >copy below</button>
+    <div id="op"></div>
+
+    <script>
+        function copyContent() {
+            let inpt = document.getElementById("input").value ;
+            let op = document.getElementById("op").innerHTML ;
+            op = "=> " + inpt ;
+        }
+        // addEventListener("click", copyContent())
+    </script>
+</body>
+</html>
