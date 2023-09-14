@@ -52,9 +52,9 @@
             <textarea class="output" id="output" cols="45" ></textarea>
         </div>
         <div class="controls">
-            <button id="saas" type="button" onclick="parseCheck()" >Beautify</button>
-            <button id="saas" type="button" onclick="" >Minify</button>
-            <button id="saas" type="button" onclick="" >Validate</button>
+            <button id="saas" type="button" onclick="beautify()" >Beautify</button>
+            <button id="saas" type="button" onclick="minify()" >Minify</button>
+            <button id="saas" type="button" onclick="validate()" >Validate</button>
         </div>
     </section>
 
@@ -138,7 +138,12 @@
             treeForm();
         }
 
-        function minify() {}
+        function minify() {
+            parseCheck();
+            input = document.getElementById("input").value ;
+            let tree = input.replace(/\s/g, '') ;
+            document.getElementById("output").value = tree;
+        }
 
     </script>
 </body>
