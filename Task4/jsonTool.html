@@ -6,20 +6,34 @@
     <title>JSON Validator</title>
 
     <style>
-        textarea {
-            resize: none;
-            border: none;
-        }
-        div {
-            min-height: 20px;
-            width: fit-content;
+        .workspace {
+            /* width: max-content; */
+            display: flex; 
+            gap: 10px;
             background-color: rgb(160, 207, 191);
             padding: 10px;
             padding-top: 30px;
+            flex-wrap: wrap;
         }
-        #op {
-            width: 500px;
-            content: "";
+        .container {
+            /* float: right; */
+            width: 70%;
+            border: 1px solid;
+        }
+        textarea {
+            resize: none;
+            border: none;
+            height: 200px;
+            width: 95%;
+        }
+        .controls {
+            background-color: white;
+            min-height: 200px;
+            width: 200px;
+            border-radius: 5px;
+            box-shadow: 0px 1px 5px grey;
+            padding-top: 30px;
+            padding: 5px;
         }
         i {
             color: rgb(213, 255, 241);
@@ -29,14 +43,20 @@
 
 <body>
     <h1>JSON Validator</h1>
-    <div>
-        <textarea class="input" id="input" rows="30" cols="45" 
-        oninput="parseCheck()" >There is something here</textarea>
-        <!-- <label for="" ></label> -->
-        <textarea class="output" id="output" rows="20" cols="45" ></textarea>
-    </div>
-    <br>
-    <button id="saas" type="button" onclick="parseCheck()" >copy below</button>
+    <section class="workspace">
+        <div class="container">
+            <textarea class="input" id="input"  cols="45" 
+            oninput="parseCheck()" >There is something here</textarea>
+            <br>
+            <br>
+            <textarea class="output" id="output" cols="45" ></textarea>
+        </div>
+        <div class="controls">
+            <button id="saas" type="button" onclick="parseCheck()" >Beautify</button>
+            <button id="saas" type="button" onclick="" >Minify</button>
+            <button id="saas" type="button" onclick="" >Validate</button>
+        </div>
+    </section>
 
     <script>
         function treeForm(input) {
@@ -74,7 +94,7 @@
                 }
                 
             }
-            output.value += "\n\n" + tree ;
+            output.value += "\n" + tree ;
         }
 
         function parseCheck() {
@@ -97,19 +117,6 @@
             treeForm(input);
         }
 
-        class arr {
-            constructor() {
-                this.item = [] ;
-            }
-            addItem(element) {
-                return this.item.push(element) ;
-            }
-            clear() {
-                this.item = [] ;
-            }
-        }
-        const stack = new arr() ;
-
         function checker(item) {
             if( item == '{' || item =='[' ) {
                 return 1;
@@ -121,6 +128,11 @@
                 return 0 ;
             }
         }
+
+        function validate() {
+        }
+
+        function beautify() {}
 
     </script>
 </body>
