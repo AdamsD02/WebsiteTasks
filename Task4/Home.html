@@ -48,6 +48,8 @@
         iframe {
             width: 80%;
             height: 100%;
+            display: none;
+            /* visibility: hidden; */
         }
     </style>
 </head>
@@ -57,18 +59,26 @@
     </section>
     <section id="tools">
         <div id="toolNav">
-            <button>Tool 1</button>
-            <button>Tool 1</button>
-            <button>Tool 1</button>
-            <button>Tool 1</button>
+            <button type="button" onclick="makeVisible('frame1', 'frame2', 'frame3', 'frame4')">Tool 1</button>
+            <button type="button" onclick="makeVisible('frame2', 'frame1', 'frame3', 'frame4')">Tool 2</button>
+            <button type="button" onclick="makeVisible('frame3', 'frame1', 'frame2', 'frame4')">Tool 3</button>
+            <button type="button" onclick="makeVisible('frame4', 'frame1', 'frame2', 'frame3')">Tool 4</button>
         </div>
         <div id="toolDisp">
-            <iframe src="merge.php" ></iframe>
-            <iframe hidden ></iframe>
-            <iframe hidden ></iframe>
-            <iframe hidden ></iframe>
+            <iframe id="frame1" src="merge.php" ></iframe>
+            <iframe id="frame2" src="jsonTool.html" ></iframe>
+            <iframe id="frame3" >lll</iframe>
+            <iframe id="frame4" >kkk</iframe>
         </div>
     </section>
     <section></section>
+    <script>
+        function makeVisible(f1, f2, f3, f4) {
+                document.getElementById(f1).style.display = "block";
+                document.getElementById(f2).style.display = "none";
+                document.getElementById(f3).style.display = "none";
+                document.getElementById(f4).style.display = "none";
+            }
+    </script>
 </body>
 </html>
