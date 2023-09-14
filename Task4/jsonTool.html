@@ -59,7 +59,8 @@
     </section>
 
     <script>
-        function treeForm(input) {
+        function treeForm() {
+            input = document.getElementById("input").value
             input = input.replace(/\s/g, '') ;
             let tree = "" ;
             const arr = input.split('');
@@ -114,7 +115,6 @@
                 output.value = "Error found: " + e.message ;
                 return;
             }
-            treeForm(input);
         }
 
         function checker(item) {
@@ -130,9 +130,15 @@
         }
 
         function validate() {
+            parseCheck();
         }
 
-        function beautify() {}
+        function beautify() {
+            parseCheck();
+            treeForm();
+        }
+
+        function minify() {}
 
     </script>
 </body>
