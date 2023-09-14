@@ -21,24 +21,46 @@
             width: 500px;
             content: "";
         }
+        i {
+            color: rgb(213, 255, 241);
+        }
     </style>
 </head>
 
 <body>
     <h1>JSON Validator</h1>
     <div>
-        <textarea class="input" id="input" rows="10" cols="50" >There is something here</textarea>
-    </div>
-    <br>
-    <div>
+        <textarea class="input" id="input" rows="10" cols="50" 
+        oninput="parseCheck()" >There is something here</textarea>
+    
         <!-- <label for="" ></label> -->
-        <textarea class="output" name="output" rows="10" cols="50" ></textarea>
+        <textarea class="output" id="output" rows="10" cols="50" ></textarea>
     </div>
     <br>
-    <button id="saas" type="button" onclick="copyContent()" >copy below</button>
-    <div id="op"></div>
+    <button id="saas" type="button" onclick="parseCheck()" >copy below</button>
+    <div id="op" hidden></div>
 
     <script>
+        function parseCheck() {
+            let input = document.getElementById("input").value ;
+            let output = document.getElementById("op") ;
+            let v1;
+            output.style.display = 'block' ;
+            output.style.color = "green" ;
+            output.style.backgroundColor = 'rgb(213, 255, 241)' ;
+            output.innerHTML = "successful." ;
+            try {
+                v1 = JSON.parse(input) ;
+            }
+            catch(e) {
+                output.style.color="red" ;
+                output.style.backgroundColor = 'rgb(255, 207, 207)' ;
+                output.innerHTML = "Error found: " + e.message ;
+                document.getElementById("output").value = "xxxx";
+                return;
+            }
+        }
+
         class arr {
             constructor() {
                 this.item = [] ;
@@ -66,49 +88,6 @@
             }
         }
 
-        function copyContent() {
-            let inpt = document.getElementById("input").value ;
-            let op = document.getElementById("op") ;
-            inpt.trim();
-            if( !/^\{/.test(inpt) && !/\}$/.test(inpt) ) {
-                op.innerHTML = `Error missing '{' or '}'` ;
-            }
-            else {
-                op.innerHTML = ` => ` + inpt + `<br> type: ` + typeof inpt;;
-            }
-
-            const sArr = inpt.split("");
-            let word = "" ;
-            
-            for (let i=0; i < sArr.length ; i++) {
-                if( /\w/.test(sArr[i]) ) {
-                    j = i ;
-                    while( /\w/.test(sArr[j])) {
-                        word += sArr[j] ;
-                        op.innerHTML += sArr[j] ;
-                        j++ ;
-                    }
-                    if( sArr[i-1] != `"` ) {
-                        op.innerHTML += '<br> Error found " at ' + (i-1) ;
-                        break ;
-                    }
-                    else if( sArr[j] != `"` ) {
-                        op.innerHTML += `<br> Error found " at ` +j ;
-                        break ;
-                    }
-                    else {
-                        i = j-1 ;
-                    }
-                }
-                else {
-                    op.innerHTML += sArr[i] ;
-                    checker(sArr[i]);
-                }
-            }
-            op.innerHTML += `<br><br> Stack items: ` + stack.item.join() ;
-            stack.clear();
-        }
-        // addEventListener("click", copyContent())
     </script>
 </body>
 </html>
