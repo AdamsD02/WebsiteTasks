@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image to Base64 Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="heading">image to base64 encoder</h1><br><br>
+    <div style="display:inline-block">
+        <div id="input-box">
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+        <div class="click-target">
+       <div  id="btn"> <button class="btn" onclick="showBase64Background()">Image to Base64</button></div>
+        </div>
+        
+    <div>
+        <input type="text" id="base64-input" placeholder="base64code"/>
+    </div>
+    <div class="click-target">
+        <div  id="btn"> <button class="btn" onclick="showImageBackground()">Base64 to image</button></div>
+     </div>
+    </div>
+    <div style="display:none" id="base64-background">
+        <div id="base64-background-content">
+            <button id="close-btn" onclick="closeIt()">x</button>
+        <p >url for html code</p>
+        <div  style="display:inline-block" class="btn-container">
+        <button  class="btnn" id="select-btn" onclick="selectAllText('htmlCodeOutput')">select All</button>
+        <button  class="btnn" id="select-btn" onclick="copyAllText('htmlCodeOutput')">copy</button>
+        <textarea class="text-holder" id="htmlCodeOutput" rows="10" cols="50" placeholder="html code will be shown here"></textarea>
+        </div>
+        <p >url for css code</p>
+        <button type="button" class="btnn" id="select-btn" onclick="selectAllText('cssCodeOutput')">select All</button>
+        <button type="button" class="btnn" id="select-btn" onclick="copyAllText('cssCodeOutput')">copy</button>
+        <textarea class="text-holder" id="cssCodeOutput" rows="10" cols="50" placeholder="css code will be shown here"></textarea>
+       
+        </div>       
+    </div>
+    <div style="display:none" id="image-background">
+        <div id="image-background-content">
+            <button id="close-btn1" onclick="closeIt1()">x</button>
+            <img id="image" src="" alt="Image"/> 
+       
+        </div>       
+    </div>
+    
+    
+    <script>
+        
+        function showBase64Background() {
+            const imageInput = document.getElementById('imageInput');
+            const htmlCodeOutput = document.getElementById('htmlCodeOutput');
+            const cssCodeOutput = document.getElementById('cssCodeOutput');
+            const base64Background = document.getElementById('base64-background');
+
+            if (imageInput.files.length > 0) {
+                const file = imageInput.files[0];
+                const reader = new FileReader();
+                console.log(reader);
+                reader.onload = function (event) {
+                    const base64String = event.target.result;
+                //   console.log(base64String);
+                    const dataURL = `${base64String}`;
+        
+                    const cssDataURL = `url('${base64String}')`;
+                    htmlCodeOutput.value = dataURL;
+                    cssCodeOutput.value = cssDataURL;
+
+                    base64Background.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select an image file.');
+            }
+        }
+        function showImageBackground() {
+            const base64Input = document.getElementById('base64-input').value;
+            const image = document.getElementById('image');
+            const imageBackground = document.getElementById('image-background');
+                console.log(base64Input);
+                    image.src=base64Input;
+                    
+                    imageBackground.style.display ='block';
+            
+                    
+        };
+        
+                function selectAllText(elementId){
+                    const element=document.getElementById(elementId);
+                    if(element && element.select){
+                        element.select();
+                    } else{
+                        console.error("element with such a error not found");
+                    }
+                 }
+                 function copyAllText(elementId){
+                    const element=document.getElementById(elementId);
+                    document.execCommand('copy');
+
+                 }
+                 function closeIt(){
+                    const base64Background = document.getElementById('base64-background');
+                    base64Background.style.display = 'none';
+                 }
+                 function closeIt1(){
+                    const imageBackground = document.getElementById('image-background');
+                    imageBackground.style.display = 'none';
+                 }
+    </script>
+</body>
+</html>
