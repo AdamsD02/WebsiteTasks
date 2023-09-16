@@ -12,6 +12,10 @@
             background: radial-gradient(circle at 20% 90%, black, blue, white, blue , black, blue, white, blue);
             background-repeat: no-repeat;
         }
+        h1 {
+            color: white;
+            text-shadow: 1px 1px 3px black;
+        }
         .input {
             width: 100%;
             margin: 0px;
@@ -136,7 +140,9 @@
 </head>
 <body>
     <section class="input">
+        <h1>
         <label for="parameters" >Search Cocktails here</label><br>
+        </h1>
         <input type="search" id="parameters" placeholder="eg: blue lagoon" size="60" autocomplete="on" onchange="dSearch()"  >
     </section>
 

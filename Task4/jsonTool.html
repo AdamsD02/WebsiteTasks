@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON Validator</title>
+    <title>JSON Validator & Beautifier </title>
 
     <style>
         .workspace {
@@ -34,6 +34,16 @@
             padding-top: 30px;
             padding: 5px;
         }
+        .buttons {
+            background-color: white;
+            font-weight: bold;
+            border: 1px solid lightgrey;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        .buttons:hover {
+            border: 1px solid grey;
+        }
         i {
             color: rgb(213, 255, 241);
         }
@@ -41,7 +51,7 @@
 </head>
 
 <body>
-    <h1>JSON Validator</h1>
+    <h1>JSON Validator & Beautifier </h1>
     <section class="workspace">
         <div class="container">
             <textarea class="input" id="input"  cols="45" 
@@ -51,9 +61,9 @@
             <textarea class="output" id="output" cols="45" ></textarea>
         </div>
         <div class="controls">
-            <button id="saas" type="button" onclick="beautify()" >Beautify</button>
-            <button id="saas" type="button" onclick="minify()" >Minify</button>
-            <button id="saas" type="button" onclick="validate()" >Validate</button>
+            <button class="buttons" type="button" onclick="beautify()" >Beautify</button>
+            <button class="buttons" type="button" onclick="minify()" >Minify</button>
+            <button class="buttons" type="button" onclick="validate()" >Validate</button>
         </div>
     </section>
 
