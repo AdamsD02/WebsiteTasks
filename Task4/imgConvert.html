@@ -5,21 +5,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="heading">image to base64 encoder</h1><br><br>
+    <h1 id="heading">image to base64 encoder</h1>
+    <br><br>
     <div style="display:inline-block">
         <div id="input-box">
             <input type="file" id="imageInput" accept="image/*">
         </div>
         <div class="click-target">
-       <div  id="btn"> <button class="btn" onclick="showBase64Background()">Image to Base64</button></div>
+            <div  id="btn"> <button class="btn" onclick="showBase64Background()">Image to Base64</button></div>
         </div>
         
     <div>
-        <input type="text" id="base64-input" placeholder="base64code"/>
+        <textarea type="text" id="base64-input" placeholder="base64code"></textarea>
     </div>
     <div class="click-target">
         <div  id="btn"> <button class="btn" onclick="showImageBackground()">Base64 to image</button></div>
-     </div>
+    </div>
     </div>
     <div style="display:none" id="base64-background">
         <div id="base64-background-content">
@@ -79,12 +80,9 @@
             const base64Input = document.getElementById('base64-input').value;
             const image = document.getElementById('image');
             const imageBackground = document.getElementById('image-background');
-                console.log(base64Input);
-                    image.src=base64Input;
-                    
-                    imageBackground.style.display ='block';
-            
-                    
+            console.log(base64Input);
+            image.src=base64Input;
+            imageBackground.style.display ='block';        
         };
         
                 function selectAllText(elementId){

@@ -18,7 +18,6 @@
         .container {
             /* float: right; */
             width: 70%;
-            border: 1px solid;
         }
         textarea {
             resize: none;
@@ -46,7 +45,7 @@
     <section class="workspace">
         <div class="container">
             <textarea class="input" id="input"  cols="45" 
-            oninput="parseCheck()" >There is something here</textarea>
+            oninput="validate()" >There is something here</textarea>
             <br>
             <br>
             <textarea class="output" id="output" cols="45" ></textarea>
@@ -95,17 +94,13 @@
                 }
                 
             }
-            output.value += "\n" + tree ;
+            output.value = "\n" + tree ;
         }
 
         function parseCheck() {
             let input = document.getElementById("input").value ;
             let output = document.getElementById("output") ;
             let v1;
-            output.style.display = 'block' ;
-            output.style.color = "green" ;
-            output.style.backgroundColor = 'rgb(213, 255, 241)' ;
-            output.value = "successful." + "\n ";
             try {
                 v1 = JSON.parse(input) ;
             }
@@ -113,8 +108,9 @@
                 output.style.color="red" ;
                 output.style.backgroundColor = 'rgb(255, 207, 207)' ;
                 output.value = "Error found: " + e.message ;
-                return;
+                return false;
             }
+            return true;
         }
 
         function checker(item) {
@@ -130,7 +126,12 @@
         }
 
         function validate() {
-            parseCheck();
+            let output = document.getElementById("output") ;
+            if( parseCheck() ) {
+                output.style.color = 'green' ;
+                output.style.backgroundColor = 'rgb(213, 255, 241)' ;
+                output.value = "Valid JSON string.\n" ;
+            }
         }
 
         function beautify() {

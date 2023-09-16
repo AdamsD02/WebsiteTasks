@@ -23,11 +23,11 @@
         }
         #toolNav {
             background-color: green;
-            width: 300px;
+            width: 20%;
             min-height: 300px;
         }
         #toolNav button {
-            width: 250px;
+            width: 100%;
             background-color: lightgreen;
             padding: 15px;
             border: none;
@@ -43,6 +43,7 @@
         #toolDisp {
             background-color: rgb(227, 227, 227);
             width: 100%;
+            min-height: 100%;
             padding-bottom: 10px;
             box-shadow: inset 0px 0px 6px gray;
         }
@@ -50,9 +51,13 @@
             width: 99%;
             height: 100%;
             display: none;
+            overflow-y: auto;
             /* visibility: hidden; */
         }
-    </style>
+        iframe::-webkit-scrollbar {
+            display: none;
+        }
+    </style> 
 </head>
 <body>
     <section id="head">
@@ -60,50 +65,29 @@
     </section>
     <section id="tools">
         <div id="toolNav">
-            <button class="button" id="b1" type="button" 
-            onmouseover="hoverChange('b1')"
+            <button class="button" id="b1" type="button"
             onclick="makeVisible('frame1', 'frame2', 'frame3', 'frame4', 'b1')">Merging tool</button>
-            <button class="button" id="b2" type="button"  
-            onmouseover="hoverChange('b2')"
+            <button class="button" id="b2" type="button" 
             onclick="makeVisible('frame2', 'frame1', 'frame3', 'frame4', 'b2')">JSON Validator & Beautifier</button>
             <button class="button" id="b3" type="button" 
-            onmouseover="hoverChange('b3')"
             onclick="makeVisible('frame3', 'frame1', 'frame2', 'frame4', 'b3')">Image to base64 converter</button>
             <button class="button" id="b4" type="button" 
-            onmouseover="hoverChange('b4')"
             onclick="makeVisible('frame4', 'frame1', 'frame2', 'frame3', 'b4')">Tool 4</button>
         </div>
         <div id="toolDisp">
             <iframe id="frame1" src="merge.php" ></iframe>
             <iframe id="frame2" src="jsonTool.html" ></iframe>
-            <iframe id="frame3" src="tool3.html" ></iframe>
+            <iframe id="frame3" src="imgConvert.html" ></iframe>
             <iframe id="frame4" ></iframe>
         </div>
     </section>
     <section></section>
     <script>
-        function hoverChange(bn) {
-            const bArr = document.getElementsByClassName("button") ;
-                for(let i=0; i<4 ; i++ ) {
-                    bArr[i].style.backgroundColor = 'lightgreen' ;
-                }
-                let bt = document.getElementById(bn) ;
-                bt.style.backgroundColor = 'green' ;
-                bt.style.color = 'white' ;
-        }
-
         function makeVisible(f1, f2, f3, f4, bn) {
                 document.getElementById(f1).style.display = "block";
                 document.getElementById(f2).style.display = "none";
                 document.getElementById(f3).style.display = "none";
                 document.getElementById(f4).style.display = "none";
-                // const bArr = document.getElementsByClassName("button") ;
-                // for(let i=0; i<4 ; i++ ) {
-                //     bArr[i].style.backgroundColor = 'lightgreen' ;
-                // }
-                // let bt = document.getElementById(bn) ;
-                // bt.style.backgroundColor = 'green' ;
-                // bt.style.color = 'white' ;
             }
     </script>
 </body>
