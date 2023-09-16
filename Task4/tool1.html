@@ -5,40 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tool 1 - Merge </title>
     <style>
-        #text3 {
-            width: 50%;
+        body {
+            margin: 0px;
+            background: linear-gradient( white, pink, rgb(252, 98, 124), pink );
+        }
+        header {
+            min-height: 100px;
+            /* margin: 0px; */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(50,50,50,0.5));
+            color:white;
+            /* text-align: center; */
+            position: relative;
+        }
+        .headline {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: auto;
+            text-align: center;
+        }
+        .workspace {
+            margin: 20px 10px;
+            color: white;
+        }
+        textarea {
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            width: 30%;
             height: 200px;
-            background-color: aquamarine;
-            box-shadow: inset 0px 0px 10px rgb(136, 0, 255);
+        }
+        #text3 {
+            width: 40%;
+            height: 200px;
         }
     </style>
 </head>
 <body>
     <script>
         function mergeTexts() {
-            let t1 = document.getElementById("text1").value.toString();
-            let t2 = document.getElementById("text2").value.toString() ;
-            let t3 = document.getElementById("test3") ;
-
-            alert( t1 + "\n Type: " + typeof t1 +"\n--\n" + t2 +  "\n Type: " + typeof t2 );
-            t3.innerHTML = " " +typeof t1 + "." + typeof t2 ;
+            let t1 = document.getElementById("text1").value;
+            let t2 = document.getElementById("text2").value ;
+            let t3 = document.getElementById("text3") ;
+            let comb = document.getElementById("comb");
+            let str = "" ;
+            const t1arr = t1.split('\n');
+            const len1 = t1arr.length ;
+            const t2arr = t2.split('\n');
+            const len2 = t2arr.length ;
+            if(t1 != '' || t2 != '') {
+                comb.innerHTML = "Number of Combinations: " + len1*len2;
+                for (const i in t1arr) {
+                    for (const j in t2arr) {
+                        str += t1arr[i] + t2arr[j] + "\n";
+                    }
+                }
+            }
+            else {
+                comb.innerHTML = "Number of Combinations: 0";
+            }
+            t3.innerHTML = str + str.length;
         }
     </script>
 
-    <!-- <form> -->
-    <h1>Merge Words</h1>
-    <p>Merge words, fast and easy.Use it for domain registrations,Google Adwords, whatever.</p>
-    <textarea id="text1" rows="10" cols="30" ></textarea>
-    <textarea id="text2" rows="10" cols="30" ></textarea>
-    <br><br>
-    <button onclick="mergeTexts()" >Click to Merge </button>
-    <br>
-    No. of combinations:
-    <br>
-    <div id="text3"></div>
-    <br>
-    <!-- </form> -->
+    <header>
+        <div class="headline" >
+            <h1>Merge Words</h1>
+            <p>Merge words, fast and easy.Use it for domain registrations,Google Adwords, whatever.</p>
+        </div>
+    </header>
 
+    <section class="workspace">
+        <textarea id="text1" rows="10" cols="30" ></textarea>
+        <textarea id="text2" rows="10" cols="30" ></textarea>
+        <br><br>
+        <button onclick="mergeTexts()" >Click to Merge </button>
+        <br>
+        <p id="comb">Number of Combinations:</p>
+        <textarea id="text3"></textarea>
+        <br>
+    </section>
     
 </body>
 </html>

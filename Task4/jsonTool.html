@@ -6,11 +6,29 @@
     <title>JSON Validator & Beautifier </title>
 
     <style>
+        header {
+            min-height: 100px;
+            margin: 0px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(50,50,50,0.5));
+            color:white;
+            /* text-align: center; */
+            position: relative;
+        }
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: auto;
+        }
+        body {
+            margin: 0px;
+            background: linear-gradient( white, rgb(160, 207, 191), lightgreen, rgb(160, 207, 191) );
+        }
         .workspace {
             /* width: max-content; */
             display: flex; 
             gap: 10px;
-            background-color: rgb(160, 207, 191);
             padding: 10px;
             padding-top: 30px;
             flex-wrap: wrap;
@@ -24,15 +42,16 @@
             border: none;
             height: 200px;
             width: 95%;
+            padding: 5px;
+            border-radius: 5px;
         }
         .controls {
             background-color: white;
             min-height: 200px;
             width: 200px;
-            border-radius: 5px;
+            border-radius: 10px;
             box-shadow: 0px 1px 5px grey;
-            padding-top: 30px;
-            padding: 5px;
+            padding: 30px 10px ;
         }
         .buttons {
             background-color: white;
@@ -51,7 +70,9 @@
 </head>
 
 <body>
-    <h1>JSON Validator & Beautifier </h1>
+    <header>
+        <h1>JSON Validator & Beautifier </h1>
+    </header>
     <section class="workspace">
         <div class="container">
             <textarea class="input" id="input"  cols="45" placeholder="Type or paste JSON text here."

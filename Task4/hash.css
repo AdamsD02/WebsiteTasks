@@ -26,10 +26,14 @@ html{
 }
 
 body{
-    background:url('blueBackground.avif') , lightblue;
+    background:url('blueBackground.avif') , linear-gradient( white, lightblue, rgb(0, 242, 255), lightblue);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* .navbar{
