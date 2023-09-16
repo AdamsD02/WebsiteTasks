@@ -10,11 +10,10 @@
             background: linear-gradient( white, pink, rgb(252, 98, 124), pink );
         }
         header {
+            padding: 20px;
             min-height: 100px;
-            /* margin: 0px; */
             background: linear-gradient(rgba(0,0,0,0.5), rgba(50,50,50,0.5));
             color:white;
-            /* text-align: center; */
             position: relative;
         }
         .headline {
@@ -33,12 +32,22 @@
             border: none;
             border-radius: 5px;
             padding: 5px;
-            width: 30%;
-            height: 200px;
+            min-width: 300px;
+            min-height: 200px;
         }
         #text3 {
-            width: 40%;
+            width: 50%;
             height: 200px;
+        }
+        #button {
+            padding: 8px;
+            background-color: white;
+            border: 2px solid gray;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        #button:hover {
+            border: 2px solid black;
         }
     </style>
 </head>
@@ -65,22 +74,22 @@
             else {
                 comb.innerHTML = "Number of Combinations: 0";
             }
-            t3.innerHTML = str + str.length;
+            t3.innerHTML = str;
         }
     </script>
 
     <header>
         <div class="headline" >
             <h1>Merge Words</h1>
-            <p>Merge words, fast and easy.Use it for domain registrations,Google Adwords, whatever.</p>
+            <p>Merge words, fast and easy. Use it for domain registrations,Google Adwords, whatever.</p>
         </div>
     </header>
 
     <section class="workspace">
-        <textarea id="text1" rows="10" cols="30" ></textarea>
-        <textarea id="text2" rows="10" cols="30" ></textarea>
+        <textarea id="text1" ></textarea>
+        <textarea id="text2" ></textarea>
         <br><br>
-        <button onclick="mergeTexts()" >Click to Merge </button>
+        <button id="button" onclick="mergeTexts()" >Click to Merge </button>
         <br>
         <p id="comb">Number of Combinations:</p>
         <textarea id="text3"></textarea>
