@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="hash.js" defer></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.18.0/js/md5.min.js"></script>
+    <link rel="stylesheet" href="hash.css">
+</head>
+<body>
+    <header class="header">
+       
+        <div class="headline container">
+            <h1>Hash Tool</h1>
+            <p>A tool for creating MD5 hash from a string</p>
+        </div>
+    </header>
+
+    <div class="container hash-container ">
+        <input type="text" name="unhashedText" id="uht"  placeholder="Please enter the text to be hashed" oninput="f1()">
+
+        <textarea name="hashedText" id="ht" cols="20" rows="1" disabled placeholder="The hashed text will be displayed here"></textarea>
+    </div>
+
+    <div class="container info-container"> 
+        <h1>MD5</h1>
+        <p>The MD5 message-digest algorithm is a widely used hash function producing a 128-bit hash value. MD5 was designed by Ronald Rivest in 1991 to replace an earlier hash function MD4, and was specified in 1992 as RFC 1321. MD5 can be used as a checksum to verify data integrity against unintentional corruption</p>
+        <br><br>
+        <h1>Why choose MD5?</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque nostrum veniam quod aliquid obcaecati exercitationem doloribus rerum quos illo dolores rem sint officia vitae officiis temporibus placeat molestias, laborum quidem sequi nam quas maiores fuga. Aspernatur perspiciatis velit ad eveniet minima! Quaerat obcaecati provident ipsum saepe placeat itaque modi quos iste voluptates commodi veritatis ad architecto, incidunt dolorum atque quae maiores laboriosam ea fuga. Optio id totam aperiam quos illum tempora sunt dignissimos molestias omnis quo fugit sint aspernatur impedit pariatur fuga expedita, vitae nisi blanditiis temporibus rerum, natus eius quis repudiandae quasi. Perspiciatis dolores aliquam deserunt. Quod nobis explicabo quasi voluptatibus esse pariatur iusto voluptatum ipsum earum soluta neque veniam, rem totam officiis cum eveniet deleniti eos. Atque autem vel incidunt explicabo amet hic ad magnam, animi odit quidem molestiae dolorum quaerat nulla adipisci ex vitae omnis facere. Sunt tenetur odio molestias temporibus earum? Delectus ducimus nisi eligendi dolore?</p>
+    </div>
+
+    <script type="text/javascript">
+        function f1(){
+            const unhashedText = document.getElementById('uht').value;
+
+            const hashedText = md5(unhashedText); 
+            document.getElementById('ht').value = hashedText;  
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+html{
+    font: size 10px;
+}
+
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+.container{
+    max-width: 1440px;
+    width:90%;
+    margin:auto;
+}
+
+.header{
+    /* height:60; */
+    min-height: 100px;
+    color:white;
+    position: relative;
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(50,50,50,0.5)),url('hashImg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body{
+    background:url('blueBackground.avif') , lightblue;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* .navbar{
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 0.5rem; */
+/* }
+
+.navbar-item{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: space-between;
+}
+.navbar-item a{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-item a:hover{
+    border-bottom: 0.2em solid blue;
+}
+
+.navbar-items{
+    margin:0 1.2rem;
+    text-transform: uppercase;
+} */ 
+
+.headline{
+    text-align: center;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    padding:0.5rem;
+}
+
+.btn{
+    margin-top:1.2em;
+    font-size:1rem;
+    border-radius: 0.5rem;
+    padding:0.2rem;
+}
+
+.hash-container{
+    /* border: 4px solid midnightblue; */
+    margin-top: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    /* background-color:rgb(90, 99, 232); */
+    
+
+}
+
+#uht,#ht{
+    width:95%;
+    height:40px;
+    margin-top :1rem;
+    margin-bottom :1rem;
+    border:0.1rem solid black;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    padding: 0.5rem;
+    /* border: 5px solid midnightblue; */
+    color:black;
+}
+
+.info-container{
+    margin-top:1rem;
+    /* text-align: center; */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    /* border:4px solid midnightblue; */
+    border-radius: 10px;
+    padding:1rem;
+    color:white;
+
+   
+
+}
