@@ -7,6 +7,7 @@
 </head>
 <body>
     <div id="mapholder"></div>
+    <div id="details"></div>
     <br>
     <button type="button" onclick="markPosition()">Show Map </button>
     <script>
@@ -24,8 +25,10 @@
             let latlon = position.coords.latitude + "," + position.coords.longitude ;
             let img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + 
               latlon + "&zoom=14&size=400x300&sensor=false&key=YOUR_KEY" ;
-            document.getElementById("mapholder").innerHTML = 
-              "<img src='" + img_url + "'>" ;
+            document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>" ;
+            document.getElementById("details").innerHTML = "<h2>Details:</h2> <p>Coordinates = " +
+                latlon + "<br>Accuracy = " + position.coords.accuracy + 
+                "<br> Heading = " + position.coords.heading + "<br> T: " +position.timestamp ;
         }
     </script>
 </body>
