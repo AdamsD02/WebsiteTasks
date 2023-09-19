@@ -1,0 +1,85 @@
+* {
+    margin: 0px;
+}
+body {
+    min-height: 100vh;
+    margin: auto;
+    text-align: center;
+}
+header{
+    background-color: rgb(29, 29, 29);
+    height: 100px;
+}
+h1 {
+    margin: auto;
+    color: aliceblue;
+}
+.container {
+    width: 80%;
+    min-height: 500px;
+    margin: auto;
+    text-align: left;
+    position: relative;
+}
+.selectbox {
+    width: 40px;
+    height: 40px;
+    margin: 20px auto auto 20px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    /* position: absolute;
+    top: 20px;
+    left: 20px; */
+    background-color: white;
+}
+.selectbox:hover {
+    background-color: rgb(225, 251, 243);
+}
+
+#details {
+    /* display: none; */
+    visibility: hidden;
+    width: 200px;
+    height: 200px;
+    margin: 5px auto auto 20px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+table {
+    list-style: none;
+    width: 100%;
+    padding: 5px 5px;
+    border-radius: 10px;
+    background-color: rgb(255, 241, 219);
+}
+td {
+    padding: 5px;
+    /* margin: 2px 5px; */
+    width: 100%;
+    /* background: linear-gradient(rgba(0,0,0,0), green ); */
+}
+td:hover {
+    font-weight: bold;
+    color: rgb(0, 119, 255);
+}
+/* @keyframes displist {
+    from { visibility: visible; }
+    to { background-color: green; 
+        top: 60px;
+    }
+} */
+
+#mapholder {
+    width: 100%;
+    min-height: 500px;
+    background: linear-gradient( green, aquamarine ) ;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(60, 58, 80, 0.57);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}

@@ -3,13 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Map Doctors</title>
+    <link type="text/css" rel="stylesheet" href="startstyle.css" >
+    <script src="startscript.js"></script>
 </head>
 <body>
-    <div id="mapholder"></div>
-    <div id="details"></div>
+    <header>
+        <h1>Map Doctors</h1>
+    </header>
+    <section class="container" onmousedown="closelist()">
+        <button id="selectbox" class="selectbox" type="button"
+          onmouseup="selectClicked(1)" 
+          onmousedown="selectClicked(2)"
+          onclick="displayList()"> list
+        </button>
+        <div id="details">
+            <table>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+                <tr><td>alt</td></tr>
+            </table>
+        </div>
+        <div id="mapholder">
+        </div>
+    </section>
     <br>
-    <button type="button" onclick="markPosition()">Show Map </button>
+    <br>
+    
     <script>
         //15.5805922, 73.8262666
         function markPosition() {//latitude, longitude) {
