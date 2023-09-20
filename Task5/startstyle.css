@@ -8,10 +8,11 @@ body {
 }
 header{
     background-color: rgb(29, 29, 29);
-    height: 100px;
+    height: auto;
 }
 h1 {
     margin: auto;
+    padding: 10px;
     color: aliceblue;
 }
 .container {
@@ -25,15 +26,13 @@ h1 {
     width: 40px;
     height: 40px;
     margin: 20px auto auto 20px;
+    border: none;
     border-radius: 10px;
     padding: 5px 10px;
-    /* position: absolute;
-    top: 20px;
-    left: 20px; */
     background-color: white;
 }
 .selectbox:hover {
-    background-color: rgb(225, 251, 243);
+    background-color: rgb(209, 248, 236);
 }
 
 #details {
@@ -42,35 +41,28 @@ h1 {
     width: 200px;
     height: 200px;
     margin: 5px auto auto 20px;
-    border-radius: 10px;
-    overflow-y: scroll;
+    border-radius: 5px;
+    overflow-y: auto;
 }
 ::-webkit-scrollbar {
     display: none;
 }
-table {
+
+ol {
     list-style: none;
     width: 100%;
     padding: 5px 5px;
-    border-radius: 10px;
-    background-color: rgb(255, 241, 219);
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
 }
-td {
+li {
     padding: 5px;
-    /* margin: 2px 5px; */
     width: 100%;
-    /* background: linear-gradient(rgba(0,0,0,0), green ); */
 }
-td:hover {
+li:hover {
     font-weight: bold;
-    color: rgb(0, 119, 255);
+    color: green;
 }
-/* @keyframes displist {
-    from { visibility: visible; }
-    to { background-color: green; 
-        top: 60px;
-    }
-} */
 
 #mapholder {
     width: 100%;
@@ -82,4 +74,10 @@ td:hover {
     top: 0px;
     left: 0px;
     z-index: -1;
+}
+
+#d2 {
+    width: 500px;
+    min-height: 100px;
+    background-color: aqua;
 }

@@ -11,33 +11,36 @@
     <header>
         <h1>Map Doctors</h1>
     </header>
+    <br>
     <section class="container" onmousedown="closelist()">
         <button id="selectbox" class="selectbox" type="button"
           onmouseup="selectClicked(1)" 
           onmousedown="selectClicked(2)"
-          onclick="displayList()"> list
+          onclick="markPosition()/* displayList()*/"> list
         </button>
         <div id="details">
-            <table>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-                <tr><td>alt</td></tr>
-            </table>
+            <ol id="detailslist">
+                <li ><button style="border: none; background: none; color: inherit;"> Dr. M. Antonio</button></li>
+                <li>Dr. M. Cardozo</li>
+                <li>Dr. Jason Mendoza</li>
+                <li>Dr. Aubrey Patel</li>
+                <li>Dr. M. Antonio</li>
+                <li>Dr. M. Antonio</li>
+                <li>Dr. M. Antonio</li>
+                <li>Dr. M. Antonio</li>
+                <li>Dr. M. Antonio</li>
+            </ol>
         </div>
         <div id="mapholder">
         </div>
     </section>
     <br>
     <br>
+    <div id="d2"></div>
     
     <script>
+        
+// let YOUR_KEY = "AIzaSyASRm6tAbF2ci_RPlgmBLMN8CGlNBZFJek" ;
         //15.5805922, 73.8262666
         function markPosition() {//latitude, longitude) {
             if(navigator.geolocation) {
@@ -51,9 +54,9 @@
             // const lat = position.coords.latitude
             let latlon = position.coords.latitude + "," + position.coords.longitude ;
             let img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + 
-              latlon + "&zoom=14&size=400x300&sensor=false&key=YOUR_KEY" ;
+              latlon + "&zoom=14&sensor=false&key=AIzaSyASRm6tAbF2ci_RPlgmBLMN8CGlNBZFJek" ;//+ YOUR_KEY ;
             document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>" ;
-            document.getElementById("details").innerHTML = "<h2>Details:</h2> <p>Coordinates = " +
+            document.getElementById("d2").innerHTML = "<h2>Details:</h2> <p>Coordinates = " +
                 latlon + "<br>Accuracy = " + position.coords.accuracy + 
                 "<br> Heading = " + position.coords.heading + "<br> T: " +position.timestamp ;
         }
