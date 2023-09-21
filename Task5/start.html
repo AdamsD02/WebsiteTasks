@@ -37,10 +37,11 @@
     <br>
     <br>
     <div id="d2"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" async defer"></script>
     
     <script>
         
-// let YOUR_KEY = "AIzaSyASRm6tAbF2ci_RPlgmBLMN8CGlNBZFJek" ;
+// let YOUR_KEY = "" ;
         //15.5805922, 73.8262666
         function markPosition() {//latitude, longitude) {
             if(navigator.geolocation) {
@@ -54,12 +55,24 @@
             // const lat = position.coords.latitude
             let latlon = position.coords.latitude + "," + position.coords.longitude ;
             let img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + 
-              latlon + "&zoom=14&sensor=false&key=AIzaSyASRm6tAbF2ci_RPlgmBLMN8CGlNBZFJek" ;//+ YOUR_KEY ;
+              latlon + "&zoom=14&sensor=false&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" ;//+ YOUR_KEY ;
             document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>" ;
             document.getElementById("d2").innerHTML = "<h2>Details:</h2> <p>Coordinates = " +
                 latlon + "<br>Accuracy = " + position.coords.accuracy + 
                 "<br> Heading = " + position.coords.heading + "<br> T: " +position.timestamp ;
         }
+
+        let map;
+        async function initMap() {
+            // if()
+            const { Map } = await google.maps.importLibrary("maps");
+            map = new Map(document.getElementById("d2"), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8,
+            });
+}
+
+initMap();
     </script>
 </body>
 </html>
