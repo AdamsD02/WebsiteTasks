@@ -7,72 +7,43 @@
     <link type="text/css" rel="stylesheet" href="startstyle.css" >
     <script src="startscript.js"></script>
 </head>
-<body>
+<body onload="display()">
     <header>
         <h1>Map Doctors</h1>
     </header>
     <br>
-    <section class="container" onmousedown="closelist()">
-        <button id="selectbox" class="selectbox" type="button"
-          onmouseup="selectClicked(1)" 
-          onmousedown="selectClicked(2)"
-          onclick="markPosition()/* displayList()*/"> list
-        </button>
-        <div id="details">
-            <ol id="detailslist">
-                <li ><button style="border: none; background: none; color: inherit;"> Dr. M. Antonio</button></li>
-                <li>Dr. M. Cardozo</li>
-                <li>Dr. Jason Mendoza</li>
-                <li>Dr. Aubrey Patel</li>
-                <li>Dr. M. Antonio</li>
-                <li>Dr. M. Antonio</li>
-                <li>Dr. M. Antonio</li>
-                <li>Dr. M. Antonio</li>
-                <li>Dr. M. Antonio</li>
-            </ol>
+    <section class="container">
+        <div style="width: 30%;"> list
+
+            <div id="details">
+                <ol>
+                    <li ><button class="detailslist" onclick="pointMarker(123)"> Dr. Nazareth</button></li>
+                    <li ><button class="detailslist" onclick="pointMarker(456)"> Dr. Gomes</button></li>
+                    <li ><button class="detailslist" onclick="pointMarker(789)"> Dr. Sankalp</button></li>
+                    <li ><button class="detailslist" onclick="pointMarker(101)"> Dr. Jonas</button></li>
+                    <li ><button class="detailslist" onclick="pointMarker(121)"> Dr. L.M.Sharma</button></li>
+                </ol>
+            </div>
+
         </div>
+
         <div id="mapholder">
         </div>
+
     </section>
     <br>
     <br>
     <div id="d2"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" async defer"></script>
+    <div id="demo"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" 
+    async defer></script>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=display&v=weekly" 
+    async defer></script>
+    
     
     <script>
         
-// let YOUR_KEY = "" ;
-        //15.5805922, 73.8262666
-        function markPosition() {//latitude, longitude) {
-            if(navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPos) ;
-            }
-            else {
-                //error
-            }
-        }
-        function showPos(position) {
-            // const lat = position.coords.latitude
-            let latlon = position.coords.latitude + "," + position.coords.longitude ;
-            let img_url = "https://maps.googleapis.com/maps/api/staticmap?center=" + 
-              latlon + "&zoom=14&sensor=false&key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg" ;//+ YOUR_KEY ;
-            document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>" ;
-            document.getElementById("d2").innerHTML = "<h2>Details:</h2> <p>Coordinates = " +
-                latlon + "<br>Accuracy = " + position.coords.accuracy + 
-                "<br> Heading = " + position.coords.heading + "<br> T: " +position.timestamp ;
-        }
-
-        let map;
-        async function initMap() {
-            // if()
-            const { Map } = await google.maps.importLibrary("maps");
-            map = new Map(document.getElementById("d2"), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
-            });
-}
-
-initMap();
     </script>
 </body>
 </html>
