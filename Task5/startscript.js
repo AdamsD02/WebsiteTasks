@@ -35,7 +35,8 @@ async function pointMarker(mId) {
     zoom: 11,
     center: { lat: leti, lng: longi }
   };
-  // map = new google.maps.Map(document.getElementById("mapholder"), mapOptions) ;
+  
+  map = new google.maps.Map(document.getElementById("mapholder"), mapOptions) ;
 
   const marker = new google.maps.Marker({
     position: {lat: leti, lng: longi }, 

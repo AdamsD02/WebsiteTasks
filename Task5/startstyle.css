@@ -20,22 +20,14 @@ h1 {
     min-height: 500px;
     margin: auto;
     text-align: left;
-    display: flex;
-    flex-wrap: wrap;
 
 }
 
 #details {
-    /* display: none; */
-    /* visibility: hidden; */
-    width: 200px;
+    width: 50%;
     height: 150px;
     margin: 5px auto auto 20px;
     border-radius: 5px;
-    overflow-y: auto;
-}
-::-webkit-scrollbar {
-    display: none;
 }
 
 ol {
@@ -46,10 +38,13 @@ ol {
     background-color: rgb(255, 255, 255);
 }
 li {
+    border: 1px solid black;
     padding: 5px;
     width: 100%;
 }
 .detailslist{
+    text-align: left;
+    width: 100%;
     border: none; 
     background: none; 
     color: inherit; 
@@ -59,18 +54,13 @@ li {
 .detailslist:hover{
     font-weight: bold;
     color: green;
-    background: rgb(255, 230, 230); 
 }
 #mapholder {
-    width: 60%;
+    min-width: 65%;
     min-height: 500px;
     background: linear-gradient( green, aquamarine ) ;
     border-radius: 10px;
     box-shadow: 3px 3px 15px rgba(60, 58, 80, 0.57);
-    /* position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: -1; */
 }
 
 #d2, #demo {
@@ -78,4 +68,18 @@ li {
     min-height: 200px;
     margin-bottom: 30px;
     background-color: aqua;
+}
+
+@media only screen and (max-width: 620px) {
+    .container {
+        display: block;
+    }
+    
+    #mapholder {
+        min-height: 350px;
+    }
+
+    #details {
+        width: 90%;
+    }
 }

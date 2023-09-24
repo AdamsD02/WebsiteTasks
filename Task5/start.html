@@ -13,8 +13,10 @@
     </header>
     <br>
     <section class="container">
-        <div style="width: 30%;"> list
 
+        <div id="mapholder"></div>
+        <br>
+        <div style="width: 90%;"> List of Doctors
             <div id="details">
                 <ol>
                     <li ><button class="detailslist" onclick="pointMarker(123)"> Dr. Nazareth</button></li>
@@ -24,17 +26,11 @@
                     <li ><button class="detailslist" onclick="pointMarker(121)"> Dr. L.M.Sharma</button></li>
                 </ol>
             </div>
-
-        </div>
-
-        <div id="mapholder">
         </div>
 
     </section>
     <br>
     <br>
-    <div id="d2"></div>
-    <div id="demo"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly" 
     async defer></script>
     
