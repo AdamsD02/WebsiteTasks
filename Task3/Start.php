@@ -3,24 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="task3.css"/>
     <title>Document</title>
-    <style>
-        body {
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
-        div {
-            min-height: 100px;
-            min-width: 100px;
-            background-color: lightgreen;
-        }
-        div:hover {
-            background-color: green;
-        }
-    </style>
 </head>
+
 <body>
-    <div>Login</div>
-    <div>Sign Up</div>
+    <header>
+        <div>
+            <div class="space">logo</div>
+            <h1>
+                Tome
+            </h1>
+        </div>
+        <nav>
+            <a href="SignIn.php">
+                <div class="nav-link">Log in</div>
+            </a>
+            <a><div class="nav-link">About</div></a>
+            <a><div class="nav-link">Gallery</div></a>
+            <a><div class="nav-link">Contact us</div></a>
+        </nav>
+        
+    </header>
+    <main>
+        <h2 class="home-head"> A place where literature meets creativity. </h2>
+        <section>
+            <div class="book-list">
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+                <div class="books">
+                    <div class="book-cover"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
 </body>
+
 </html>

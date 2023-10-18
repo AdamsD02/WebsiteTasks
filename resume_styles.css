@@ -3,6 +3,8 @@
 }
 body {
     margin: 0;
+    padding: 0;
+    width: 100vw;
     background-color: #0d5c63;
 }
 header {
@@ -41,14 +43,18 @@ h1 + p{
     margin-left: 330px;
 }
 .content, .schemes {
+    width: 100%;
     display: flex;
-    gap: 30px;
-    padding: 20px;
+    /* flex-wrap: wrap; */
+    /* gap: 2px; */
+    /* padding: 20px; */
     background-color: white;
     margin-bottom: 20px;
 }
 
 .basic {
+    /* width: 30%; */
+    margin:20px;
     flex: 30%;
     padding-top: 80px;
     padding-left: 20px;
@@ -57,7 +63,9 @@ h1 + p{
     background-color: #bfedef;
 }
 .detailed {
-    padding: 10px 60px 10px 20px;
+    /* width: 50%; */
+    margin: 20px;
+    /* padding: 10px 20px; */
     background-color: white;
     border: 3px dotted #bfedef;
     border-radius: 20px;
@@ -68,6 +76,7 @@ h2 {
 }
 
 hr {
+    width: 90%;
     height: 3px;
     background-color: #247b7b;
     border-radius: 2px;
@@ -82,3 +91,34 @@ span{
     min-height: 20px;
     background-color: #c4b7cb;
 } */
+@media only screen and (max-width: 620px) {
+    header {
+        padding: 20px 10px;
+    }
+    .profilepic {
+        margin: 0;
+        width: 150px;
+        height: 150px;
+        top: 20px;
+        left: 10px;
+    }
+    .name {
+        font-size: 200%;
+        margin-left: 180px;
+        margin-top: 5px;
+    }
+    h1 + p {
+        font-size: 100%;
+        margin-left: 180px;
+    }
+    .basic {
+        padding: 10px;
+        font-size: 80%;
+    }
+    .detailed{
+        font-size: 80%;
+    }
+    .content, .schemes {
+        flex-wrap: wrap;
+    }
+}
