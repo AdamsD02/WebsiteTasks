@@ -20,7 +20,7 @@
                 <div class="nav-link">Log in</div>
             </a>
             <a><div class="nav-link">About</div></a>
-            <a><div class="nav-link">Gallery</div></a>
+            <a><div class="nav-link">Home</div></a>
             <a><div class="nav-link">Contact us</div></a>
         </nav>
         

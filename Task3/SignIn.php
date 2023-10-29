@@ -1,36 +1,85 @@
 <?php
-// session_start();
-// if( isset(session_name())) {
-// }
-// session_destroy();
-
-function isRegi($email) {
-    $conn = mysqli_connect("loaclhost","root", "", "db_name");
-    if($conn) {
-        $q = "SELECT * FROM table_name WHERE uid=$email ;" ;
-        $r = mysqli_query($conn, $q);
-        if($r) {
-            
-        }
+session_start();
+if( isset($_SESSION["s_name"])) {
+    if( isset($_SESSION["s_pswd"]))
+    {
+        echo '<script type="text/javascript"> window.open("Profile.php");' ;
     }
-    
-    return true;
 }
+// session_destroy();
+?>
+
+<?php
+
 $pswdErr = $uidErr = "";
 $pswd = $uid = "";
+$dbpswd = "" ;
 
-if( $_SERVER["RQUEST_METHOD"] == "POST" ) {
-    if(empty($_POST["userid"])) {
+function isRegi($email) {
+    $conn = mysqli_connect("localhost","root", "", "webdb");
+    if($conn) {
+        $q = "SELECT * FROM logindata WHERE email='" . $email ."';" ; 
+        $r = mysqli_query($conn, $q); 
+        if($r) { 
+            if( $row = $r->fetch_assoc() ) {
+                $dbpswd = $row["pass"];
+            }
+            else {
+                mysqli_close($conn) ;
+                return false ;
+            }
+            mysqli_close($conn) ; 
+           return true;
+        }
+        else {
+            echo "failed.<br>" ;
+        }
+        mysqli_close($conn) ; 
+    }
+    return false;
+}
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+// form validations 
+if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
+    if( empty($_POST["userid"]) ) {
         $uidErr = "Please enter user ID." ;
     }
-    elseif( !filter_var($uid, FILTER_VALIDATE_EMAIL) ) {
-        $uidErr = "Invalid email id." ;
-    }
-    elseif( !isRegi($uid) ) {
-        $uidErr = "User not Registered." ;
+    else {
+        $uid = test_input($_POST["userid"]) ;
+        if( !filter_var($uid, FILTER_VALIDATE_EMAIL) ) {
+            $uidErr = "User ID invalid." ;
+        }
+        elseif( !isRegi($uid) ) {
+            $uidErr = "User not Registered." ;
+        }
+        else{
+            if( empty($_POST["pswd"]) ) { 
+                $pswdErr = "Password invalid." ; 
+            }
+            else {
+                $pswd = test_input($_POST["pswd"]) ;
+                if( $pswd != $dbpswd ) {
+                    $pswdErr = "Password invalid." ; 
+                }
+                else {
+                    $_SESSION["s_name"] = $uid ;
+                    $_SESSION["s_pswd"] = $pswd ;
+                    echo '<script type="text/javascript"> window.open("Profile.php"); </script>' ;
+                    //login successful.
+                }
+            }
+        }
     }
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,6 +109,11 @@ if( $_SERVER["RQUEST_METHOD"] == "POST" ) {
     
     <main>
         <h2>Log In</h2>
+
+        <div style="text-align: left; margin: 5px 20px;">
+            <span class="req">* Required field. </span>
+        </div>
+
         <section class="form-section">
             <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="form-elements">
@@ -83,18 +137,18 @@ if( $_SERVER["RQUEST_METHOD"] == "POST" ) {
                 Don't have account? 
                 <a href="SignUp.php" style="color: green;">Create New!</a>
             </div>
-            <div>
-                <span class="req">* Required field. </span>
-                <?php
-                if( $uidErr != "" ) {
-                    echo '<span class="req">' . $uidErr . '</span>';
-                }
-                elseif( $pswdErr != "" ) {
-                    echo '<span class="req">' . $pswdErr . '</span>';
-                }
-                ?>
-            </div>
         </section>
+
+        <div>
+            <?php
+            if( $uidErr != "" ) {
+                echo '<br><span class="req">' . $uidErr . '</span>';
+            }
+            elseif( $pswdErr != "" ) {
+                echo '<br><span class="req">' . $pswdErr . '</span>';
+            }
+            ?>
+        </div>
     </main>
 
 </body>
