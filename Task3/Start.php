@@ -1,10 +1,39 @@
+<?php
+session_start(); 
+
+if( isset($_SESSION["s_name"]) && isset($_SESSION["s_pswd"]) ) {
+    $s_email = $_SESSION["s_name"] ;
+    $s_pass = $_SESSION["s_pswd"] ;
+    $q = "SELECT * FROM logindata where email='$s_email';" ;
+    if( $s_email!="" && $s_pass!="" ) { 
+        $conn = mysqli_connect("localhost", "root", "", "webdb"); 
+        if($conn) {
+            $r = mysqli_query($conn, $q) ;
+            if(!$r) {
+                mysqli_close($conn) ; 
+            }
+            elseif($row = $r->fetch_assoc()) {
+                $upass = $row["pass"] ;
+                if( $s_pass == $upass ) { // "passwords match." ; 
+                    echo `<script></script>`;
+                }
+                else {}
+            }
+            mysqli_close($conn) ;
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
     <link type="text/css" rel="stylesheet" href="task3.css"/>
-    <title>Document</title>
+    <title>Home</title>
 </head>
 
 <body>
@@ -18,6 +47,9 @@
         <nav>
             <a href="SignIn.php">
                 <div class="nav-link">Log in</div>
+            </a>
+            <a href="Profile.php" id="" style="display:none;">
+                <div><i class="fa-regular fa-user" style="color: #111b2c;"></i></div>
             </a>
             <a><div class="nav-link">About</div></a>
             <a><div class="nav-link">Home</div></a>

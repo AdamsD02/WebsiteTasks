@@ -3,26 +3,46 @@ session_start();
 if( isset($_SESSION["s_name"])) {
     if( isset($_SESSION["s_pswd"]))
     {
-        echo '<script type="text/javascript"> window.open("Profile.php");' ;
+        echo '<script type="text/javascript"> window.open("Profile.php"); </script>' ;
     }
 }
 ?>
-
+ 
 <?php
-$pswd = $uid = $cpswd = "" ;
-$pswdErr = $uidErr = $cpswdErr = "" ;
-$dbpswd = "" ;
+$name = $email = $pswd = $cpswd = $gender = $country = "" ;
+$nameErr = $emailErr = $pswdErr = $cntyErr = "" ;
 
 function isRegi($email) {
-    $conn = mysqli_connect("loaclhost","root", "", "db_name");
+    $conn = mysqli_connect("localhost","root", "", "webdb");
     if($conn) {
-        $q = "SELECT * FROM table_name WHERE uid=$email ;" ; 
+        $q = "SELECT * FROM logindata WHERE email='$email' ;" ; 
         $r = mysqli_query($conn, $q); 
         if($r) { 
-           return true;
+            if( $row = $r->fetch_assoc() ) {
+                mysqli_close($conn) ;
+                return true;
+            }
+            mysqli_close($conn) ; 
+            return false;
         }
     }
+    mysqli_close($conn) ; 
     return false;
+}
+
+function usrRegistration($q) {
+    $qr = "" ;
+    $conn = mysqli_connect("localhost", "root", "", "webdb") ;
+    if($conn) {
+        $qr = mysqli_query($conn, $q) ;
+        if(!$qr) {
+            echo "<br><span class='req'>Error:" . mysqli_error($conn) ."</span><br>";
+            mysqli_close($conn) ; 
+            return false;
+        }
+    }
+    mysqli_close($conn) ; 
+    return true;
 }
 
 function test_input($data) {
@@ -33,41 +53,51 @@ function test_input($data) {
 }
 
 if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
-    if( empty($_POST["userid"]) ) {
-        $uidErr = "Please enter user ID." ;
+    $name = test_input($_POST["u_name"]) ;
+    $email = test_input($_POST["userid"]) ;
+    $pswd = test_input($_POST["pswd"]) ; 
+    $cpswd = test_input($_POST["c_pswd"]) ; 
+    $gender = test_input($_POST["gen"]) ;
+    $country = test_input($_POST["cntry"]) ;
+
+    if( empty($name) ) {
+        $nameErr = "Please enter valid name." ;
+    }
+    elseif( empty($email) ) {
+        $uidErr = "Please enter email." ;
+    }
+    elseif( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
+        $emailErr = "User email invalid." ;
+    }
+    elseif( isRegi($email) ) {
+        $emailErr = "User is Registered. Try to login." ;
+    }
+    elseif( empty($_POST["pswd"]) ) { 
+        $pswdErr = "Please enter Password." ; 
+    }
+    elseif( empty($_POST["c_pswd"]) ) {
+        $pswdErr = "Please confirm password" ;
+    }
+    elseif( $pswd != $cpswd ) {
+        $pswdErr = "Password not matching" ; 
+    }
+    elseif( $country == "" ) {
+        $cntyErr = "Please select country." ;
     }
     else {
-        $uid = test_input($_POST["userid"]) ;
-        if( !filter_var($uid, FILTER_VALIDATE_EMAIL) ) {
-            $uidErr = "User ID invalid." ;
-        }
-        elseif( isRegi($uid) ) {
-            $uidErr = "User is Registered. Try to login." ;
-        }
-        else{
-            if( empty($_POST["pswd"]) ) { 
-                $pswdErr = "Please enter Password." ; 
-            }
-            elseif( empty($_POST["c_pswd"]) ) {
-                $cpswdErr = "Please confirm password" ;
-            }
-            else {
-                $pswd = test_input($_POST["pswd"]) ;
-                $cpswd = test_input($_POST["c_pswd"]) ;
-                if( $pswd != $cpswd ) {
-                    $cpswdErr = "Password not matching" ; 
-                }
-                else {
-                    $_SESSION["s_name"] = $uid ;
-                    $_SESSION["s_pswd"] = $pswd ;
-                    echo '<script type="text/javascript"> window.open("Profile.php"); </script>' ;
-                    //login successful.
-                }
-            }
+        $_SESSION["s_name"] = $email ;
+        $_SESSION["s_pswd"] = $pswd ;
+        $q = "INSERT INTO logindata(name, email, pass, country, gender) VALUES('$name', '$email', '$pswd', '$country', '$gender');" ;
+        if(usrRegistration($q)) {
+            echo '<script type="text/javascript"> window.open("Profile.php"); </script>' ;
+            //login successful.
         }
     }
 }
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,13 +133,20 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
         </div>
 
         <section class="form-section">
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" >
+                <div class="form-elements">
+                    <label>
+                        <span class="req">*</span>
+                        Name :
+                    </label>
+                    <input type="text" name="u_name" value="<?php echo $name; ?>">
+                </div>
                 <div class="form-elements">
                     <label>
                         <span class="req">*</span>
                         Email Id:
                     </label>
-                    <input type="text" name="userid" value="<?php echo $uid; ?>">
+                    <input type="text" name="userid" value="<?php echo $email; ?>">
                 </div>
                 <div class="form-elements">
                     <label>
@@ -136,6 +173,20 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
                     <input type="radio" name="gen" value="f" > Female.
                     <input type="radio" name="gen" value="o" checked > Others.
                 </div>
+                <div class="form-elements">
+                    <label>
+                        <span class="req">*</span>
+                        Country :
+                    </label>
+                    <select name="cntry">
+                        <option value="" selected>- - </option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="India">India</option>
+                        <option value="USA">U.S.A. </option>
+                    </select>
+                </div>
                 <div class="form-elements submit-button">
                     <input type="submit" value="REGISTER">
                 </div>
@@ -148,11 +199,17 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
 
         <div>
             <?php
-            if( $uidErr != "" ) {
-                echo '<br><span class="req">' . $uidErr . '</span>';
+            if( $nameErr != "" ) {
+                echo '<br><span class="req">' . $nameErr ."</span>" ;
+            }
+            elseif( $emailErr != "" ) {
+                echo '<br><span class="req">' . $emailErr . '</span>';
             }
             elseif( $pswdErr != "" ) {
                 echo '<br><span class="req">' . $pswdErr . '</span>';
+            }
+            elseif( $cntyErr != "" ) {
+                echo '<br><span class="req">' . $cntyErr . '</span>';
             }
             ?>
         </div>
