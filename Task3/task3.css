@@ -84,17 +84,15 @@ section {
     margin: 10px;
     background-color: skyblue;
 }
-
-::-webkit-scrollbar{
+::-webkit-scrollbar-track {
     width: 5px;
 }
-/* ::-webkit-scrollbar-button{
-    background-color: rgba(255, 0, 0, 1);
-    width: 5px;
-} */
+::-webkit-scrollbar{
+    height: 15px;
+}
+
 ::-webkit-scrollbar-thumb {
-    height: 5px;
-    border-radius: 10px;
+    border-radius: 3px;
     background-color: blueviolet;
 }
 

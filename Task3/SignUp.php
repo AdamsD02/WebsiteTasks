@@ -1,9 +1,28 @@
 <?php
 session_start();
-if( isset($_SESSION["s_name"])) {
-    if( isset($_SESSION["s_pswd"]))
-    {
-        echo '<script type="text/javascript"> window.open("Profile.php"); </script>' ;
+if( isset($_SESSION["s_name"]) && isset($_SESSION["s_pswd"]) ) {
+    $semail = $_SESSION["s_name"];
+    $spass = $_SESSION["s_pswd"];
+    $conn = mysqli_connect("localhost", "root", "", "webdb") ;
+    if($conn) { 
+        $q = "SELECT * FROM logindata WHERE email='$semail';" ;
+        $r = mysqli_query($conn, $q) ;
+        if(!$r){
+            mysqli_close($conn) ;
+        }
+        elseif($row = $r->fetch_assoc()) {
+            $dbpass = $row["pass"] ;
+            if( $dbpass == $spass && $spass != "" ) {
+                //alert that user is logged in and then goto profile.
+            }
+            else {
+                // hide profile icon. 
+            }
+        }
+        mysqli_close($conn) ;
+    }
+    else {
+        //script to display connection error. and refresh page.
     }
 }
 ?>

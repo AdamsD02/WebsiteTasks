@@ -27,6 +27,7 @@ else {
                     // "passwords donot match." ; 
                     echo '<script type="text/javascript"> locatio.assign("Start.php"); </script>' ;
                 }
+                echo `<script type="text/javascript">iconOn();</script>` ;
             }
         }
     }
@@ -40,7 +41,7 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
     $_SESSION["s_pswd"] = "" ;
     session_destroy();
     $uname = $uemail = $upass = $ugender = $ucntry = $upass = "" ;
-    echo '<script type="text/javascript"> window.open("Start.php"); </script>' ;
+    echo '<script type="text/javascript"> location.assign("SignIn.php"); </script>' ;
 }
 ?>
 
@@ -63,11 +64,14 @@ if( $_SERVER["REQUEST_METHOD"] == "POST" ) {
             </h1>
         </div>
         <nav>
-            <a href="SignIn.php">
+            <a href="SignIn.php" id="login">
                 <div class="nav-link">Log in</div>
             </a>
+            <a href="Profile.php" id="picon" style="display:none;">
+                <div><i class="fa-regular fa-user" style="color: #111b2c;"></i></div>
+            </a>
             <a><div class="nav-link">About</div></a>
-            <a><div class="nav-link">Gallery</div></a>
+            <a href="Start.php"><div class="nav-link">Home</div></a>
             <a><div class="nav-link">Contact us</div></a>
         </nav>
         

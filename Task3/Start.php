@@ -14,10 +14,14 @@ if( isset($_SESSION["s_name"]) && isset($_SESSION["s_pswd"]) ) {
             }
             elseif($row = $r->fetch_assoc()) {
                 $upass = $row["pass"] ;
-                if( $s_pass == $upass ) { // "passwords match." ; 
-                    echo `<script></script>`;
+                if( $s_pass == $upass ) { 
+                    // "passwords match." => display profile icon
+                    echo `<script type="text/javascript"> iconOn(); </script>`;
                 }
-                else {}
+                else {
+                    //hide profile icon.
+                    echo `<script type="text/javascript"> iconOff(); </script>`;
+                }
             }
             mysqli_close($conn) ;
         }
@@ -45,14 +49,14 @@ if( isset($_SESSION["s_name"]) && isset($_SESSION["s_pswd"]) ) {
             </h1>
         </div>
         <nav>
-            <a href="SignIn.php">
+            <a href="SignIn.php" id="login">
                 <div class="nav-link">Log in</div>
             </a>
-            <a href="Profile.php" id="" style="display:none;">
+            <a href="Profile.php" id="picon" style="display:none;">
                 <div><i class="fa-regular fa-user" style="color: #111b2c;"></i></div>
             </a>
             <a><div class="nav-link">About</div></a>
-            <a><div class="nav-link">Home</div></a>
+            <a href="Start.php"><div class="nav-link">Home</div></a>
             <a><div class="nav-link">Contact us</div></a>
         </nav>
         
