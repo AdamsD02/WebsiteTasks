@@ -84,11 +84,9 @@ section {
     margin: 10px;
     background-color: skyblue;
 }
-::-webkit-scrollbar-track {
-    width: 5px;
-}
+
 ::-webkit-scrollbar{
-    height: 15px;
+    width: 3px;
 }
 
 ::-webkit-scrollbar-thumb {
